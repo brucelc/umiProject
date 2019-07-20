@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es6",
+    "module": "es6",
     "moduleResolution": "node",
     "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "strict": true,
+    // "strict": true,
     "paths": {
       "@/*": ["src/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true, // 开启装饰器支持
   }
 }
