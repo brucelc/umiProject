@@ -5,7 +5,6 @@
  */
 import { mtopFetch } from '@ali/venice-utils';
 import { isDaily, env } from '../env';
-import { message } from 'antd';
 
 const mtopParams = {
   env,
@@ -16,7 +15,7 @@ const mtopParams = {
 export const mtopInstance = mtopFetch(mtopParams);
 
 // 接口处理
-export const mtop = (api: string, data = {}, config =  {}) => {
+export const mtop = (api: string, data = {}, config: any = {}) => {
   return mtopInstance.request(api, {
     ...data,
   }, {

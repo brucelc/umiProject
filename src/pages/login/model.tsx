@@ -3,34 +3,32 @@
  * @Date: 2019-07-17 22:37:15
  * @Last Modified by: bruce.lc
  */
+import router from 'umi/router';
+import { axios } from 'utils/request/index';
+import store from 'store';
+import { message } from 'antd';
+
 export default {
   namespace: 'login',
   state: [],
   reducers: {
-    delete(state, { payload: id }) {
-      return state.filter(item => item.id !== id);
+
+  },
+  effects: {
+    *login({ payload }, { put, call, select }) {
+      const data = yield call(axios, {
+        url: 'http://139.199.95.41/miaowei/login',
+        method: 'POST',
+        data: payload,
+      });
+      const { status, msg } = data;
+      if (status === 2001) {
+        message.success(msg);
+        store.set('userInfo', payload);
+        router.push('/products');
+      } else {
+        message.error(msg);
+      }
     },
   },
-  // effects: {
-  //   *login({ payload }, { put, call, select }) {
-  //     const data = yield call(mtop, 'portal.departmentgroup.create', {
-  //       ...payload,
-  //     });
-  //     // const data = yield call(loginUser, payload)
-  //     console.log('data11', data, loginUser);
-  //     const { locationQuery } = yield select(_ => _.app)
-  //     if (data.success) {
-  //       const { from } = locationQuery
-  //       yield put({ type: 'app/query' })
-  //       if (!pathMatchRegexp('/login', from)) {
-  //         if (['', '/'].includes(from)) router.push('/dashboard')
-  //         else router.push(from)
-  //       } else {
-  //         router.push('/dashboard')
-  //       }
-  //     } else {
-  //       throw data
-  //     }
-  //   },
-  // },
 };

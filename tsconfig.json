@@ -7,12 +7,18 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
+    "noUnusedLocals": true,
     "baseUrl": ".",
     // "strict": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "utils/*": ["src/utils/*"],
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"],
+      "models/*": ["src/models/*"],
+      "constants/*": ["src/constants/*"],
     },
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true, // 开启装饰器支持
+    "experimentalDecorators": true,
   }
 }

@@ -1,5 +1,6 @@
+// import pxToViewPort from 'postcss-px-to-viewport'; 设置移动端适配
 import { IConfig } from 'umi-types';
-import { resolve } from 'path'
+import { resolve } from 'path';
 
 // ref: https://umijs.org/config/
 const config: IConfig =  {
@@ -9,7 +10,7 @@ const config: IConfig =  {
     ['umi-plugin-react', {
       antd: true,
       dva: {
-        immer: true,
+        // immer: true,
       },
       dynamicImport: {
         webpackChunkName: true,
@@ -42,8 +43,20 @@ const config: IConfig =  {
     services: resolve(__dirname, './src/services'),
     themes: resolve(__dirname, './src/themes'),
     utils: resolve(__dirname, './src/utils'),
+    constants: resolve(__dirname, './src/constants'),
   },
   exportStatic: true, // 配置打包生成静态htnl
-}
+  // extraPostCSSPlugins: [
+  //   pxToViewPort({
+  //     viewportWidth: 750,
+  //     viewportHeight: 1334,
+  //     unitPrecision: 3,
+  //     viewportUnit: 'vw',
+  //     selectorBlackList: ['.ignore', '.hairlines'],
+  //     minPixelValue: 1,
+  //     mediaQuery: false,
+  //   }),
+  // ],
+};
 
 export default config;

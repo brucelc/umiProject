@@ -1,11 +1,24 @@
 defaultSeverity: error
 extends:
+  - tslint-config-ali/react
   - tslint-react
   - tslint-eslint-rules
 jsRules:
+  no-unused-vars: false
 rules:
   eofline: true
-  no-console: true
+  no-console: false
   no-construct: true
   no-debugger: true
   no-reference: true
+  no-trailing-whitespace: false
+  no-implicit-dependencies: false
+  jsx-no-multiline-js: false
+  jsx-alignment: false
+  jsx-no-lambda: false
+  variable-name: [true, "ban-keywords", "check-format", "allow-pascal-case"]
+  semicolon: [
+      true,
+      "always",
+      "ignore-interfaces"
+  ]

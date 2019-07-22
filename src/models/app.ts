@@ -1,164 +1,128 @@
-// /* global window */
+/* global window */
 
-// import { router } from 'utils'
-// import { stringify } from 'qs'
-// import store from 'store'
+import { router } from 'umi';
+import { stringify } from 'qs';
+import store from 'store';
 // import { ROLE_TYPE } from 'utils/constant'
-// import { queryLayout, pathMatchRegexp } from 'utils'
+import { queryLayout, pathMatchRegexp } from 'utils/index';
 // import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 // import api from 'api'
-// import config from 'config'
+import { config } from 'utils/config';
 
 // const { queryRouteList, logoutUser, queryUserInfo } = api
 
-// export default {
-//   namespace: 'app',
-//   state: {
-//     routeList: [
-//       {
-//         id: '1',
-//         icon: 'laptop',
-//         name: 'Dashboard',
-//         zhName: '仪表盘',
-//         router: '/dashboard',
-//       },
-//     ],
-//     locationPathname: '',
-//     locationQuery: {},
-//     theme: store.get('theme') || 'light',
-//     collapsed: store.get('collapsed') || false,
-//     notifications: [
-//       {
-//         title: 'New User is registered.',
-//         date: new Date(Date.now() - 10000000),
-//       },
-//       {
-//         title: 'Application has been approved.',
-//         date: new Date(Date.now() - 50000000),
-//       },
-//     ],
-//   },
-//   subscriptions: {
-//     setup({ dispatch }) {
-//       console.log('监听启动');
-//       dispatch({ type: 'query' })
-//     },
-//     // setupHistory({ dispatch, history }) {
+export default {
+  namespace: 'app',
+  state: {
+    routeList: [],
+    locationPathname: '',
+    locationQuery: {},
+    notifications: [
+      {
+        title: 'New User is registered.',
+        date: new Date(Date.now() - 10000000),
+      },
+      {
+        title: 'Application has been approved.',
+        date: new Date(Date.now() - 50000000),
+      },
+    ],
+  },
+  subscriptions: {
+    setup({ dispatch }) {
+      console.log('监听启动');
+      dispatch({ type: 'query' });
+    },
+    setupHistory({ dispatch, history }) {
+      console.log('监听路由变化');
+      history.listen(location => {
+        dispatch({
+          type: 'updateState',
+          payload: {
+            locationPathname: location.pathname,
+            locationQuery: location.query,
+          },
+        });
+      });
+    },
 
-//     //   history.listen(location => {
-//     //     console.log('setupHistory', location);
-//     //     dispatch({
-//     //       type: 'updateState',
-//     //       payload: {
-//     //         locationPathname: location.pathname,
-//     //         locationQuery: location.query,
-//     //       },
-//     //     })
-//     //   })
-//     // },
+    // setupRequestCancel({ history }) {
+    //   history.listen(() => {
+    //     const { cancelRequest = new Map() } = window
 
-//     setupRequestCancel({ history }) {
-//       history.listen(() => {
-//         const { cancelRequest = new Map() } = window
+    //     cancelRequest.forEach((value, key) => {
+    //       if (value.pathname !== window.location.pathname) {
+    //         value.cancel(CANCEL_REQUEST_MESSAGE)
+    //         cancelRequest.delete(key)
+    //       }
+    //     })
+    //   })
+    // },
+  },
+  effects: {
+    *query({ payload }, { call, put, select }) {
+      // store isInit to prevent query trigger by refresh
+      const isInit = store.get('isInit');
+      if (isInit) {
+        return;
+      }
+      const { locationPathname } = yield select(_ => _.app);
+      // 获取个人信息, 以及分配路由
+      // const { success, user } = yield call(queryUserInfo, payload);
+      const userInfo = store.get('userInfo');
 
-//         cancelRequest.forEach((value, key) => {
-//           if (value.pathname !== window.location.pathname) {
-//             value.cancel(CANCEL_REQUEST_MESSAGE)
-//             cancelRequest.delete(key)
-//           }
-//         })
-//       })
-//     },
-//   },
-//   effects: {
-//     *query({ payload }, { call, put, select }) {
-//       // store isInit to prevent query trigger by refresh
-//       const isInit = store.get('isInit');
-//       if (isInit) return
-//       const { locationPathname } = yield select(_ => _.app)
-//       // console.log('初始化1', locationPathname, isInit);
+      if (userInfo) {
+        store.set('isInit', true);
+        if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
+          router.push({
+            pathname: '/products',
+          });
+        }
+      } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
+        router.push({
+          pathname: '/login',
+          search: stringify({
+            from: locationPathname,
+          }),
+        });
+      }
+    },
 
-//       const { success, user } = yield call(queryUserInfo, payload)
+    // *signOut({ payload }, { call, put }) {
+    //   const data = yield call(logoutUser)
+    //   if (data.success) {
+    //     store.set('routeList', [])
+    //     store.set('permissions', { visit: [] })
+    //     store.set('user', {})
+    //     store.set('isInit', false)
+    //     yield put({ type: 'query' })
+    //   } else {
+    //     throw data
+    //   }
+    // },
+  },
+  reducers: {
+    updateState(state, { payload }) {
+      console.log('state更新', state, payload);
+      return {
+        ...state,
+        ...payload,
+      };
+    },
 
+    handleThemeChange(state, { payload }) {
+      store.set('theme', payload);
+      state.theme = payload;
+    },
 
-//       // console.log('初始化2', success, user, queryLayout(config.layouts, locationPathname));
+    handleCollapseChange(state, { payload }) {
+      store.set('collapsed', payload);
+      state.collapsed = payload;
+    },
 
-//       if (success && user) {
-//         const { list } = yield call(queryRouteList)
-//         const { permissions } = user
-//         let routeList = list
-//         if (
-//           permissions.role === ROLE_TYPE.ADMIN ||
-//           permissions.role === ROLE_TYPE.DEVELOPER
-//         ) {
-//           permissions.visit = list.map(item => item.id)
-//         } else {
-//           routeList = list.filter(item => {
-//             const cases = [
-//               permissions.visit.includes(item.id),
-//               item.mpid
-//                 ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
-//                 : true,
-//               item.bpid ? permissions.visit.includes(item.bpid) : true,
-//             ];
-//             // console.log('cases', cases, cases.every(_ => _));
-//             return cases.every(_ => _)
-//           })
-//         }
-//         // console.log('routeList===', routeList);
-//         store.set('routeList', routeList)
-//         store.set('permissions', permissions)
-//         store.set('user', user)
-//         store.set('isInit', true)
-//         if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
-//           router.push({
-//             pathname: '/dashboard',
-//           })
-//         }
-//       } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
-//         router.push({
-//           pathname: '/login',
-//           search: stringify({
-//             from: locationPathname,
-//           }),
-//         })
-//       }
-//     },
+    allNotificationsRead(state) {
+      state.notifications = [];
+    },
+  },
+};
 
-//     *signOut({ payload }, { call, put }) {
-//       const data = yield call(logoutUser)
-//       if (data.success) {
-//         store.set('routeList', [])
-//         store.set('permissions', { visit: [] })
-//         store.set('user', {})
-//         store.set('isInit', false)
-//         yield put({ type: 'query' })
-//       } else {
-//         throw data
-//       }
-//     },
-//   },
-//   reducers: {
-//     updateState(state, { payload }) {
-//       // console.log('state', state, payload);
-//       return {
-//         ...state,
-//         ...payload,
-//       }
-//     },
-
-//     handleThemeChange(state, { payload }) {
-//       store.set('theme', payload)
-//       state.theme = payload
-//     },
-
-//     handleCollapseChange(state, { payload }) {
-//       store.set('collapsed', payload)
-//       state.collapsed = payload
-//     },
-
-//     allNotificationsRead(state) {
-//       state.notifications = []
-//     },
-//   },
-// }

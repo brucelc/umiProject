@@ -1,19 +1,30 @@
 
 import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import styles from './index.less';
 
-@Form.create()
-export default class Login extends PureComponent {
+interface Iprops {
+  form: any,
+  dispatch: (arg0: any) => void,
+}
+
+@connect(({ loading }: any) => ({
+  loading,
+}))
+class Login extends PureComponent<Iprops> {
   handleSubmit = (e: any) => {
     e.preventDefault();
+    const { dispatch } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        dispatch({ type: 'login/login', payload: values });
       }
     });
-  };
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -57,3 +68,5 @@ export default class Login extends PureComponent {
     );
   }
 }
+
+export default Form.create()(Login);
