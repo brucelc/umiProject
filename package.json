@@ -60,6 +60,11 @@
     "*.{js,jsx}": [
       "eslint --fix",
       "git add"
+    ],
+    "**/*.less": [
+      "stylelint --syntax less",
+      "npm run prettier",
+      "git add"
     ]
   },
   "engines": {

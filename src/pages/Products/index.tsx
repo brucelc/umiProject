@@ -1,7 +1,7 @@
 import { connect } from 'dva';
 import React from 'react';
 import router from 'umi/router';
-import { Link } from 'umi';
+import Link from 'umi/Link';
 
 import ProductList from './components/ProductList';
 
