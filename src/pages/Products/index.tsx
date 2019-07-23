@@ -3,10 +3,10 @@ import React from 'react';
 import router from 'umi/router';
 import Link from 'umi/link';
 
-import ProductList from './component/ProductList';
+import ProductList from './component/productList';
 
 // style
-import style from './index.less';
+import style from './style.less';
 
 interface Iprops {
   dispatch: (arg0: any) => void,
