@@ -39,7 +39,7 @@ class BaseLayout extends PureComponent<Iprops> {
 
     const Container = LayoutMap[queryLayout(config.layouts, location.pathname)];
 
-    console.log('Container', queryLayout(config.layouts, location.pathname), config.layouts, location.pathname)
+    // console.log('Container', config.layouts, location.pathname)
     const currentPath = location.pathname + location.search;
     if (currentPath !== this.previousPath) {
       NProgress.start();

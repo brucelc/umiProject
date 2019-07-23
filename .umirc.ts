@@ -45,7 +45,8 @@ const config: IConfig =  {
     utils: resolve(__dirname, './src/utils'),
     constants: resolve(__dirname, './src/constants'),
   },
-  exportStatic: true, // 配置打包生成静态htnl
+  exportStatic: true,
+  // exportStatic: { htmlSuffix : true }, // 配置打包生成静态htnl
   // extraPostCSSPlugins: [
   //   pxToViewPort({
   //     viewportWidth: 750,

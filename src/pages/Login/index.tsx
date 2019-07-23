@@ -36,7 +36,7 @@ class Login extends PureComponent<Iprops> {
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
+              placeholder="账号:111111"
             />,
           )}
         </Form.Item>
@@ -47,7 +47,7 @@ class Login extends PureComponent<Iprops> {
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
-              placeholder="Password"
+              placeholder="密码:111111"
             />,
           )}
         </Form.Item>

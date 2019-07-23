@@ -7,7 +7,7 @@ import ProductList from './components/ProductList';
 
 interface Iprops {
   dispatch: (arg0: any) => void,
-  products: any[],
+  products: any,
 }
 
 class Products extends React.PureComponent<Iprops> {
@@ -25,7 +25,7 @@ class Products extends React.PureComponent<Iprops> {
       type: 'products/delete',
       payload: id,
     });
-  };
+  }
 
   render() {
     const { products } = this.props;
