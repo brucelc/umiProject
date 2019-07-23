@@ -3,10 +3,10 @@ import React from 'react';
 import router from 'umi/router';
 import Link from 'umi/link';
 
-import ProductList from './component/productList';
+// import ProductList from './component/productList';
 
 // style
-import style from './style.less';
+// import style from './style.less';
 
 interface Iprops {
   dispatch: (arg0: any) => void,
@@ -37,10 +37,10 @@ class Products extends React.PureComponent<Iprops> {
 
     return (
       <div>
-        <h2 className={style.normal}>List of Products</h2>
+        <h2>List of Products</h2>
         <button onClick={() => { router.goBack(); }}>go back</button>
         <Link to="/login">退出登陆</Link>
-        <ProductList onDelete={this.handleDelete} products={list} />
+        {/* <ProductList onDelete={this.handleDelete} products={list} /> */}
       </div>
     );
   }

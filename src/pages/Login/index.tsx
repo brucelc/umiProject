@@ -4,7 +4,7 @@ import { connect } from 'dva';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
-import styles from './Style.less';
+// import styles from './Style.less';
 
 interface Iprops {
   form: any,
@@ -29,7 +29,7 @@ class Login extends PureComponent<Iprops> {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className={styles['login-form']}>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your username!' }],
