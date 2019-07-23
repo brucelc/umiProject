@@ -17,5 +17,5 @@
 .umi
 .umi-production
 
-.history
-.vscode/
+.history/*
+.vscode/*
