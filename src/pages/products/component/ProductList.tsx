@@ -1,5 +1,5 @@
 import { Table, Popconfirm, Button } from 'antd';
-import React from 'React';
+import React from 'react';
 
 const ProductList = ({ onDelete, products }: any) => {
   const columns = [
