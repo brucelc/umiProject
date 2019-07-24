@@ -4,6 +4,8 @@
     "start": "umi dev",
     "build": "umi build",
     "analyze": "cross-env ANALYZE=1 umi build",
+    "daily": "def p -d",
+    "publish": "def p -o",
     "test": "umi test",
     "lint:es": "eslint --ext .js src mock tests",
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
@@ -45,6 +47,7 @@
     "postcss-px-to-viewport": "^1.1.1",
     "react-test-renderer": "^16.7.0",
     "stylelint": "^10.1.0",
+    "stylelint-config-standard": "^18.3.0",
     "tslint": "^5.12.0",
     "tslint-config-ali": "^0.2.4",
     "tslint-eslint-rules": "^5.4.0",
@@ -64,7 +67,6 @@
     ],
     "**/*.less": [
       "stylelint --syntax less",
-      "npm run prettier",
       "git add"
     ]
   },
