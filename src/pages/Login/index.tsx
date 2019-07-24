@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 // style
-import style from './style.less';
+import style from './index.less';
 
 interface Iprops {
   form: any,
