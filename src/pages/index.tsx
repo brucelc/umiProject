@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 
-import styles from './index.less';
 import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 
+import styles from './index.less';
+
 export default class App extends PureComponent {
-  constructor(props: any) {
-    super(props);
-  }
 
   render() {
     return (
