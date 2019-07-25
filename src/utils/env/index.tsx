@@ -7,21 +7,21 @@ import { envInfo } from '@ali/venice-utils';
 
 
 // 环境判断
-export const env = envInfo({
+const env = envInfo({
   dev() {
     return window.location.host.indexOf(':') > -1 || window.localStorage.env === 'dev';
   },
   daily() {
     return window.localStorage.env === 'daily' ||
-      window.location.host === 'venice.daily.taobao.net' ||
-      window.location.host === 'venice.taobao.net';
+      window.location.host === 'mtdb.daily.taobao.net' ||
+      window.location.host === 'mtdb.taobao.net';
   },
   pre() {
-    return (window.location.host === 'yunshangzhipian.com' &&
-      window.location.search.indexOf('env=wapa') > -1) || window.location.host === 'pre-zhipian.taopiaopiao.com';
+    return (window.location.host === 'pre-mtdb.taopiaopiao.com' &&
+      window.location.search.indexOf('env=wapa') > -1) || window.location.host === 'pre-mtdb.taopiaopiao.com';
   },
   prod() {
-    return window.location.host === 'yunshangzhipian.com' &&
+    return window.location.host === 'mtdb.yunshangzhipian.com' &&
       window.location.search.indexOf('env=wapa') < 0;
   },
 });
