@@ -7,7 +7,7 @@ import { envInfo } from '@ali/venice-utils';
 
 
 // 环境判断
-const env = envInfo({
+export const env = envInfo({
   dev() {
     return window.location.host.indexOf(':') > -1 || window.localStorage.env === 'dev';
   },
