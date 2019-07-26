@@ -9,6 +9,8 @@ import { queryLayout, pathMatchRegexp } from 'utils/index';
 // import api from 'api'
 import { config } from 'utils/config';
 
+console.log('====', window.YLB_CONFIG);
+
 // const { queryRouteList, logoutUser, queryUserInfo } = api
 
 export default {
