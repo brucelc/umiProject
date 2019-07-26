@@ -10,7 +10,7 @@ import { queryLayout, pathMatchRegexp } from 'utils/index';
 import { config } from 'utils/config';
 
 console.log('====', window.YLB_CONFIG);
-
+window.publicPath = window.YLB_CONFIG.assets;
 // const { queryRouteList, logoutUser, queryUserInfo } = api
 
 export default {
