@@ -5,6 +5,7 @@ import Link from 'umi/link';
 
 import styles from './index.less';
 
+__webpack_public_path__ = window.YLB_CONFIG.assets;
 export default class App extends PureComponent {
 
   render() {
