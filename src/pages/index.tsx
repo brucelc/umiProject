@@ -5,7 +5,7 @@ import Link from 'umi/link';
 
 import styles from './index.less';
 
-window.publicPath = window.YLB_CONFIG.assets;
+// window.publicPath = window.YLB_CONFIG.assets;
 export default class App extends PureComponent {
 
   render() {
