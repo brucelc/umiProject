@@ -16,12 +16,14 @@ export default {
   },
   effects: {
     *login({ payload }, { put, call, select }) {
+      console.log('请求', payload);
       const data = yield call(axios, {
         url: 'http://139.199.95.41/miaowei/login',
         method: 'POST',
         data: payload,
       });
       const { status, msg } = data;
+      console.log('请求2', data);
       if (status === 2001) {
         message.success(msg);
         store.set('userInfo', payload);
