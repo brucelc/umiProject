@@ -30,6 +30,23 @@ const config: IConfig =  {
           /service\.(t|j)sx?$/,
           /components\//,
         ],
+        update: routes => {
+          const newRoutes = [];
+          for (const item of routes[0].routes) {
+            newRoutes.push(item);
+            if (item.path) {
+              newRoutes.push(
+                Object.assign({}, item, {
+                  path:
+                    `/umi${item.path}`,
+                // tslint:disable-next-line:trailing-comma
+                })
+              );
+            }
+          }
+          routes[0].routes = newRoutes;
+          return routes;
+        },
       },
     }],
   ],

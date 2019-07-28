@@ -25,6 +25,7 @@ export default {
       if (status === 2001) {
         message.success(msg);
         store.set('userInfo', payload);
+        console.log('跳转到list');
         router.push('/products');
       } else {
         message.error(msg);

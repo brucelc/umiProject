@@ -1,6 +1,6 @@
 import { connect } from 'dva';
 import React from 'react';
-import router from 'umi/router';
+import { router } from 'utils/index';
 import Link from 'umi/link';
 
 import ProductList from './components/ProductList';
@@ -39,7 +39,7 @@ class Products extends React.PureComponent<Iprops> {
       <div>
         <h2 className={styles.normal}>List of Products</h2>
         <button onClick={() => { router.goBack(); }}>go back</button>
-        <Link to="/login">退出登陆</Link>
+        <Link to="/umi/login">退出登陆</Link>
         <ProductList onDelete={this.handleDelete} products={list} />
       </div>
     );

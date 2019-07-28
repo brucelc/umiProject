@@ -6,11 +6,8 @@ import { isDev } from './env/index';
 
 const myRouter = { ...umiRouter };
 const routerAddPrefix = params => {
-  const { pathname } = params;
-  if (isDev) {
-    params.pathname = `/umi${pathname}`;
-  }
-  return params;
+  console.log('params', params);
+  return isDev ? `/umi${params}` : params;
 };
 
 myRouter.push = flow (
