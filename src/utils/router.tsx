@@ -9,11 +9,11 @@ const routerAddPrefix = params => {
   console.log('params', params);
   let paramsTemp = params;
   if (isString(params)) {
-    paramsTemp = params;
+    paramsTemp = isDev ? params : `/umi${params}`;
   } else {
-    paramsTemp.pathname = params;
+    paramsTemp.pathname = isDev ? params.pathname : `/umi${params.pathname}`;
   }
-  return isDev ? `/umi${paramsTemp}` : paramsTemp;
+  return paramsTemp;
 };
 
 myRouter.push = flow (
