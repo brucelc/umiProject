@@ -73,21 +73,21 @@ export default {
       // const { success, user } = yield call(queryUserInfo, payload);
       const userInfo = store.get('userInfo');
 
-      if (userInfo) {
-        store.set('isInit', true);
-        if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
-          router.push({
-            pathname: '/products',
-          });
-        }
-      } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
-        router.push({
-          pathname: '/login',
-          search: stringify({
-            from: locationPathname,
-          }),
-        });
-      }
+      // if (userInfo) {
+      //   store.set('isInit', true);
+      //   if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
+      //     router.push({
+      //       pathname: '/products',
+      //     });
+      //   }
+      // } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
+      //   router.push({
+      //     pathname: '/login',
+      //     search: stringify({
+      //       from: locationPathname,
+      //     }),
+      //   });
+      // }
     },
 
     // *signOut({ payload }, { call, put }) {

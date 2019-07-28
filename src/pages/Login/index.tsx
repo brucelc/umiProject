@@ -21,8 +21,10 @@ class Login extends PureComponent<Iprops> {
     const { dispatch } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', values, dispatch);
         dispatch({ type: 'login/login', payload: values });
+        console.log('dispatch: ', dispatch);
+
       }
     });
   }
