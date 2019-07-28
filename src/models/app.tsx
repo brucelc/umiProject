@@ -1,17 +1,16 @@
 /* global window */
 
-import { router } from 'umi';
 import { stringify } from 'qs';
 import store from 'store';
 // import { ROLE_TYPE } from 'utils/constant'
-import { queryLayout, pathMatchRegexp } from 'utils/index';
+import { router, queryLayout, pathMatchRegexp } from 'utils/index';
 // import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 // import api from 'api'
 import { config } from 'utils/config';
-/* eslint-disable */
-console.log('====', window.YLB_CONFIG);
-__webpack_public_path__ = window.YLB_CONFIG.assets;
-/* eslint-disable */
+
+/* eslint:disable */
+__webpack_public_path__ = window.YLB_CONFIG ? window.YLB_CONFIG.assets : '/';
+
 // const { queryRouteList, logoutUser, queryUserInfo } = api
 
 export default {

@@ -5,9 +5,11 @@
  */
 import { mtop } from './request/mtop';
 import { queryLayout, pathMatchRegexp } from './layout';
+import { router } from './router';
 
 export {
   mtop,
   queryLayout,
   pathMatchRegexp,
+  router,
 };

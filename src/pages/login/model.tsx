@@ -3,7 +3,7 @@
  * @Date: 2019-07-17 22:37:15
  * @Last Modified by: bruce.lc
  */
-import router from 'umi/router';
+import { router } from 'utils/index';
 import { axios } from 'utils/request/index';
 import store from 'store';
 import { message } from 'antd';
