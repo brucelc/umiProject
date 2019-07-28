@@ -8,9 +8,10 @@ import { queryLayout, pathMatchRegexp } from 'utils/index';
 // import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 // import api from 'api'
 import { config } from 'utils/config';
-
+/* eslint-disable */
 console.log('====', window.YLB_CONFIG);
-window.publicPath = window.YLB_CONFIG.assets;
+__webpack_public_path__ = window.YLB_CONFIG.assets;
+/* eslint-disable */
 // const { queryRouteList, logoutUser, queryUserInfo } = api
 
 export default {

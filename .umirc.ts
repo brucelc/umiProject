@@ -58,7 +58,7 @@ const config: IConfig =  {
   //     mediaQuery: false,
   //   }),
   // ],
-  // runtimePublicPath: true,
+  runtimePublicPath: true,
 };
 
 export default config;
