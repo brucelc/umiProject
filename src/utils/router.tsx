@@ -1,5 +1,5 @@
 import umiRouter from 'umi/router';
-import { flow } from 'lodash';
+import { flow, isString } from 'lodash';
 
 import { isDev } from './env/index';
 
@@ -7,7 +7,13 @@ import { isDev } from './env/index';
 const myRouter = { ...umiRouter };
 const routerAddPrefix = params => {
   console.log('params', params);
-  return isDev ? `/umi${params}` : params;
+  let paramsTemp = params;
+  if (isString(params)) {
+    paramsTemp = params;
+  } else {
+    paramsTemp.pathname = params;
+  }
+  return isDev ? `/umi${paramsTemp}` : paramsTemp;
 };
 
 myRouter.push = flow (
