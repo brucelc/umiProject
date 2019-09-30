@@ -8,7 +8,7 @@
     "publish": "def p -o",
     "test": "umi test",
     "lint:es": "eslint --ext .js src mock tests",
-    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
     "@ali/venice-utils": "^1.0.0",
