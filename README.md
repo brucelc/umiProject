@@ -25,3 +25,5 @@
 
 ### 其他待定
     - "precommit": "lint-staged" // 暂时去掉
+    - "@ali/venice-utils": "^1.0.0", // 暂时去掉
+    -
