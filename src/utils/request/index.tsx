@@ -1,7 +1,7 @@
 import axios from './axios';
-import { mtop } from './mtop';
+// import { mtop } from './mtop';
 
 export {
   axios,
-  mtop,
+  // mtop,
 };
