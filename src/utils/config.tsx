@@ -10,7 +10,7 @@ export const config = {
     {
       name: 'primary',
       include: [/.*/],
-      exclude: [/(\/(en|zh))*\/login|\/404/],
+      exclude: [/(\/(en|zh))*\/login|\/404|\/projects/],
     },
   ],
 };

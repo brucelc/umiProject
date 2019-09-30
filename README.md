@@ -24,3 +24,4 @@
   - exportStatic: { htmlSuffix : true } 打包切换多页
 
 ### 其他待定
+    - "precommit": "lint-staged" // 暂时去掉

@@ -1,0 +1,48 @@
+/*
+ * @Author: bruce.lc
+ * @Date: 2019-09-19 22:49:56
+ * @Last Modified by: bruce.lc
+ */
+ ul,li {
+   margin: 0;
+   padding: 0;
+
+   list-style: none;
+ }
+
+ .top {
+  display: flex;
+ }
+
+ .left {
+   flex-basis: 30%;
+
+   border: 1px solid red;
+ }
+ .middle {
+    flex-grow: 1;
+
+    margin-left: 20px;
+    .content {
+      display: flex;
+      >div:nth-of-type(2) {
+        margin-left: 20px;
+      }
+    }
+ }
+
+ .right {
+  flex-basis: 30%;
+
+  border: 1px solid red;
+ }
+
+ .bottom {
+   .content {
+     display: flex;
+     justify-content: space-between;
+     >div {
+       flex-basis: 48%;
+     }
+   }
+ }
