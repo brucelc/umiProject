@@ -10,5 +10,5 @@ before_install:
 script:
   - npm run build
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t 18201430329/umiProjects:latest .
-  - docker push 18201430329/umiProjects:latest
+  - docker build -t 18201430329/umiprojects:latest .
+  - docker push 18201430329/umiprojects:latest
