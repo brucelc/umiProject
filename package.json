@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "umi dev -p 3001",
     "build": "umi build",
     "analyze": "cross-env ANALYZE=1 umi build",
     "daily": "def p -d",
@@ -11,11 +11,14 @@
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
+    "@antv/data-set": "^0.10.2",
     "antd": "^3.19.5",
     "axios": "^0.19.0",
+    "bizcharts": "^3.5.5",
     "dva": "^2.6.0-beta.6",
     "dva-model-extend": "^0.1.2",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "nprogress": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

@@ -6,11 +6,16 @@
 import React from 'react';
 import { Table } from 'antd';
 
+// component
+import AllProgress from '../AllProgress';
+import AllTimeChanges from '../AllTimeChanges';
+
 // style
 import style from './index.less';
 
 // mock数据
 import {
+  allProgressData,
   particiProgress,
   moduleProgress,
   addDemand,
@@ -19,108 +24,224 @@ import {
 
 // tslint:disable-next-line:no-empty-interface
 interface Iprops {
-
+  allProgress: any,
+  modulesTimes: any,
+  ownersTimes: any,
+  clientTimes: any,
 }
 
-const Tab1: React.SFC<Iprops> = (data: Iprops) => {
+const allProgressColumns = [
+  {
+    title: '明细',
+    dataIndex: 'name',
+    width: 70,
+    key: 'name',
+  },
+  {
+    title: '工作量',
+    dataIndex: 'time',
+    width: 80,
+    key: 'time',
+  },
+  {
+    title: '完成量',
+    dataIndex: 'real',
+    width: 80,
+    key: 'real',
+  },
+  {
+    title: '进度',
+    dataIndex: 'progress',
+    width: 70,
+    key: 'progress',
+  },
+];
 
-  const moduleProgressColumns = [
+
+const addDemandColumns = [
+  {
+    title: '模块',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: '需求描述',
+    dataIndex: 'describe',
+    key: 'describe',
+  },
+  {
+    title: '工作量变更',
+    dataIndex: 'change',
+    key: 'change',
+  },
+];
+
+const changeDemandColumns = [
+  {
+    title: '需求描述',
+    dataIndex: 'describe',
+    key: 'describe',
+  },
+  {
+    title: '变更原因',
+    dataIndex: 'reason',
+    key: 'reason',
+  },
+  {
+    title: '工作量变更',
+    dataIndex: 'change',
+    key: 'change',
+  },
+];
+
+const Tab1: React.SFC<Iprops> = (data: Iprops) => {
+  const moduleProgressColumns = (allProgress) => [
     {
       title: '模块',
       dataIndex: 'name',
       key: 'name',
+      width: 100,
+    },
+    {
+      title: '工作量',
+      dataIndex: 'time',
+      key: 'time',
+      width: 80,
+    },
+    {
+      title: '预计完成量',
+      dataIndex: 'plainTimes',
+      key: 'plainTimes',
+      width: 100,
+    },
+    {
+      title: '实际完成量',
+      dataIndex: 'real',
+      key: 'real',
+      width: 100,
     },
     {
       title: '进度',
       dataIndex: 'progress',
       key: 'progress',
+      width: 70,
+      render: (current) => {
+        return (
+          <div
+            className={Number(current.replace('%', '')) - Number(allProgress) < 1 ?
+            style.warning : ''}
+          >{current}</div>
+        );
+      },
     },
   ];
+  const getParticiProgressColumns = (allProgress) => {
+    return [
+      {
+        title: '人员',
+        dataIndex: 'name',
+        key: 'name',
+        width: 90,
+      },
+      {
+        title: '工作量',
+        dataIndex: 'time',
+        key: 'time',
+        width: 80,
+      },
+      {
+        title: '预计完成量',
+        dataIndex: 'plainTimes',
+        key: 'plainTimes',
+        width: 100,
+      },
+      {
+        title: '实际完成量',
+        dataIndex: 'real',
+        key: 'real',
+        width: 100,
+      },
+      {
+        title: '进度',
+        dataIndex: 'progress',
+        key: 'progress',
+        width: 70,
+        render: (current, record) => {
+          console.log('record', record);
+          return (
+            <div
+              className={Number(record.plainTimes) - Number(record.real) > 1 ?
+              style.warning : ''}
+            >{current}</div>
+          );
+        },
+      },
+    ];
+  };
 
-  const particiProgressColumns = [
-    {
-      title: '人员',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '工作量评估',
-      dataIndex: 'amount',
-      key: 'progress',
-    },
-    {
-      title: '完成度',
-      dataIndex: 'progress',
-      key: 'progress',
-    },
-  ];
 
-  const addDemandColumns = [
-    {
-      title: '模块',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '需求描述',
-      dataIndex: 'describe',
-      key: 'describe',
-    },
-    {
-      title: '工作量变更',
-      dataIndex: 'change',
-      key: 'change',
-    },
-  ];
+  const {
+    allProgress,
+    modulesTimes,
+    ownersTimes,
+    clientTimes,
+  } = data;
 
-  const changeDemandColumns = [
-    {
-      title: '需求描述',
-      dataIndex: 'describe',
-      key: 'describe',
-    },
-    {
-      title: '变更原因',
-      dataIndex: 'reason',
-      key: 'reason',
-    },
-    {
-      title: '工作量变更',
-      dataIndex: 'change',
-      key: 'change',
-    },
-  ];
+  console.log('allProgress', allProgress);
 
   return (
     <div className={style.tab1}>
       <div className={style.top}>
         <div className={style.left} >
           <h3>总体进度</h3>
-          <div>图表站位</div>
+          <AllProgress allProgress={allProgress} />
         </div>
         <div className={style.middle}>
-          <h3>项目风险</h3>
+          <h3>项目工作量明细</h3>
           <div className={style.content}>
             <Table
-              columns={moduleProgressColumns}
-              dataSource={moduleProgress}
+              columns={allProgressColumns}
+              dataSource={clientTimes.map(val => ({
+                ...val,
+                name: val.title,
+                progress: `${val.progress}%`,
+              }))}
+              bordered={true}
               pagination={false}
             />
 
             <Table
-              columns={particiProgressColumns}
-              dataSource={particiProgress}
+              columns={moduleProgressColumns(allProgress.progress)}
+              dataSource={modulesTimes.map(val => ({
+                ...val,
+                name: val.title,
+                progress: `${val.progress}%`,
+              }))}
+              bordered={true}
               pagination={false}
             />
+
+            <Table
+              columns={getParticiProgressColumns(allProgress.progress)}
+              dataSource={ownersTimes.map(val => ({
+                ...val,
+                name: val.title,
+                progress: `${val.progress}%`,
+              }))}
+              bordered={true}
+              pagination={false}
+            />
+
+
           </div>
         </div>
-        <div className={style.right}>
+        {/* <div className={style.right}>
           <h3>总体工作量变化</h3>
-          <div>图标站位</div>
-        </div>
+          <AllTimeChanges />
+        </div> */}
       </div>
 
-      <div className={style.bottom}>
+      {/* <div className={style.bottom}>
         <h3>今日变化</h3>
         <div className={style.content}>
           <div>
@@ -140,7 +261,7 @@ const Tab1: React.SFC<Iprops> = (data: Iprops) => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

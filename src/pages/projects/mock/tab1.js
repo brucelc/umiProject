@@ -1,6 +1,21 @@
 
 const allProgress =  0.3; // 总体进度
 
+const allProgressData = [
+  {
+    name: '前端',
+    progress: 0.2,
+  },
+  {
+    name: '后端',
+    progress: 0.2,
+  },
+  {
+    name: '总计',
+    progress: 0.2,
+  },
+]
+
 const moduleProgress = [ // 模块进度
   {
     name: '模块1',
@@ -97,6 +112,7 @@ const changeDemand = [ // 变更需求
 export {
   allProgress,
   moduleProgress,
+  allProgressData,
   addDemand,
   particiProgress,
   changeDemand,

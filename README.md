@@ -27,3 +27,7 @@
     - "precommit": "lint-staged" // 暂时去掉
     - "@ali/venice-utils": "^1.0.0", // 暂时去掉
     - docker build的时候, 报项目名字不能为大写,必须修改为小写
+
+  ### 作为docker实现的第一个spa引用, 每次提交到githu代码都会重新生成一次镜像, 然后nginx只要更新镜像就会重新更新内容
+  - nginx配置history路由重定向到html
+  - docker配置只需要拉取镜像就可以了
