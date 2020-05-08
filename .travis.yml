@@ -3,6 +3,9 @@ node_js:
   - "12"
 services:
   - docker
+branches:
+ only:
+   - master
 
 before_install:
   - npm install
