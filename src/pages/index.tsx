@@ -12,7 +12,7 @@ export default class App extends PureComponent {
     return (
       <div className={styles.normal}>
         <div className={styles.welcome}>doc 分支</div>
-        <Link to="/products">go to /products- 2020-05-08号</Link><br />
+        <Link to="/products">go to /products- 2020-05-09号</Link><br />
         <Link to="/login">go to /login</Link>
         <ul className={styles.list}>
           <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
